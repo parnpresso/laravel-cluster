@@ -10,3 +10,18 @@ services:
       - ./nginx/sites-conf:/etc/nginx/sites-enabled
       - ./nginx/logs:/var/log/nginx
       - ./apps:/var/www
+
+  app-alice:
+    image: php:7.3-fpm
+    volumes:
+      - ./apps/alice.com:/var/www/alice.com
+    tty: true
+
+  app-bob:
+    image: php:7.3-fpm
+    volumes:
+      - ./apps/bob.com:/var/www/bob.com
+    tty: true
+
+networks:
+  default:
