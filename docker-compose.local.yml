@@ -15,6 +15,7 @@ services:
     image: php:7.3-fpm
     volumes:
       - ./apps/alice.com:/var/www/alice.com
+      - ./apps/conf/www.conf:/usr/local/etc/php-fpm.d/www.conf
     tty: true
 
   app-bob:
@@ -22,6 +23,16 @@ services:
     volumes:
       - ./apps/bob.com:/var/www/bob.com
     tty: true
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: tob_wholesale
+      MYSQL_USER: exampleuser
+      MYSQL_PASSWORD: examplepass
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - ./apps/alice.com/tob_wholesale.sql:/etc/tob_wholesale.sql
 
 networks:
   default:
